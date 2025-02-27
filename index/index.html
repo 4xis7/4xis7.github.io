@@ -102,23 +102,6 @@
         document.getElementById('post-title').value = '';
         document.getElementById('post-content').value = '';
     }
-
-    function openCommentSection(button) {
-        button.nextElementSibling.classList.toggle("hidden");
-    }
-
-    function addComment(button) {
-        let input = button.previousElementSibling;
-        let commentText = input.value.trim();
-        if (commentText === '') return;
-
-        let commentDiv = document.createElement('div');
-        commentDiv.classList.add('comment');
-        commentDiv.textContent = commentText;
-
-        button.parentElement.querySelector(".comments").appendChild(commentDiv);
-        input.value = '';
-    }
 </script>
 
 <style>
@@ -128,11 +111,12 @@
 
     .post {
         background: white;
-        padding: 15px;
+        padding: 20px;
         border-radius: 8px;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         margin-bottom: 15px;
         width: 60%;
+        max-width: 800px;
     }
 
     .post-header {
@@ -143,7 +127,7 @@
     }
 
     .post-content {
-        padding: 10px;
+        padding: 15px;
     }
 
     .post-actions {
