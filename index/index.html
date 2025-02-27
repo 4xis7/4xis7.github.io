@@ -82,15 +82,20 @@
         let newPost = document.createElement('div');
         newPost.classList.add('post');
         newPost.innerHTML = `
-            <h3>${title}</h3>
-            <p>${content}</p>
-            <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
-            <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
-            <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
-            <div class="comment-section hidden">
-                <input type="text" class="comment-input" placeholder="Write a comment...">
-                <button onclick="addComment(this)">Post</button>
-                <div class="comments"></div>
+            <div class="post-header"></div>
+            <div class="post-content">
+                <h3>${title}</h3>
+                <p>${content}</p>
+                <div class="post-actions">
+                    <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
+                    <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
+                    <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
+                </div>
+                <div class="comment-section hidden">
+                    <input type="text" class="comment-input" placeholder="Write a comment...">
+                    <button onclick="addComment(this)">Post</button>
+                    <div class="comments"></div>
+                </div>
             </div>
         `;
         postContainer.prepend(newPost);
@@ -114,21 +119,37 @@
         button.parentElement.querySelector(".comments").appendChild(commentDiv);
         input.value = '';
     }
-
-    function upvote(button) {
-        let score = parseInt(button.textContent.split(' ')[1]);
-        button.textContent = `⬆ ${score + 1}`;
-    }
-
-    function downvote(button) {
-        let score = parseInt(button.textContent.split(' ')[1]);
-        button.textContent = `⬇ ${score - 1}`;
-    }
 </script>
 
 <style>
     .hidden {
         display: none;
+    }
+
+    .post {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        width: 60%;
+    }
+
+    .post-header {
+        height: 10px;
+        background: #ffffff;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .post-content {
+        padding: 10px;
+    }
+
+    .post-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
     }
 
     .comment-section {
@@ -142,7 +163,6 @@
         border-radius: 5px;
     }
 </style>
-
 
 <style>
     body {
