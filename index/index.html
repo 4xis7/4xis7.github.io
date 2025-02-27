@@ -12,12 +12,12 @@
 <body>
     <header class="navbar">
         <div class="menu-icon" onclick="toggleSidebar()">☰</div>
-        <input type="text" class="search-bar" placeholder="Search">
         <div class="logo">Name</div>
+        <input type="text" class="search-bar" placeholder="Search">
         <div class="nav-icons">
-            <button class="chat-btn" onclick="navigateTo('chat.html')">💬</button>
+            <button class="chat-btn">💬</button>
             <button class="notif-btn">🔔</button>
-            <div class="profile-icon" onclick="toggleRightPanel()"><img src="profile.jpg" alt="Profile"></div>
+            <div class="profile-icon"><img src="profile.jpg" alt="Profile"></div>
         </div>
     </header>
 
@@ -25,116 +25,42 @@
         <aside class="sidebar">
             <nav>
                 <ul>
-                    <li><a href="home.html">🏠 Home</a></li>
-                    <li><a href="popular.html">🔥 Popular Title</a></li>
-                    <li><a href="content.html">🌎 All Content</a></li>
-                    <li><a href="feed.html">📌 My Feed</a></li>
-                    <li><a href="chat.html">💬 Chat Rooms</a></li>
+                    <li><a href="#">🏠 Home</a></li>
+                    <li><a href="#">🔥 Popular Title</a></li>
+                    <li><a href="#">🌎 All Content</a></li>
+                    <li><a href="#">📌 My Feed</a></li>
+                    <li><a href="#">💬 Chat Rooms</a></li>
                     <li class="category">
-                        <span onclick="toggleCategory()">📂 Category ▼</span>
-                        <ul id="category-list" class="hidden">
-                            <li><a href="anime.html">📺 Anime</a></li>
-                            <li><a href="books.html">📚 Books</a></li>
-                            <li><a href="learning.html">🎓 Learning</a></li>
-                            <li><a href="movies.html">🎬 Movie</a></li>
-                            <li><a href="music.html">🎵 Musics</a></li>
-                            <li><a href="news.html">📰 News</a></li>
-                            <li><a href="sports.html">⚽ Sports</a></li>
+                        <span>📂 Category</span>
+                        <ul>
+                            <li><a href="#">📺 Anime</a></li>
+                            <li><a href="#">📚 Books</a></li>
+                            <li><a href="#">🎓 Learning</a></li>
+                            <li><a href="#">🎬 Movie</a></li>
+                            <li><a href="#">🎵 Musics</a></li>
+                            <li><a href="#">📰 News</a></li>
+                            <li><a href="#">⚽ Sports</a></li>
                         </ul>
                     </li>
-                    <li><a href="rules.html">⚖ Rules</a></li>
-                    <li><a href="about.html">ℹ️ About Us</a></li>
+                    <li><a href="#">⚖ Rules</a></li>
+                    <li><a href="#">ℹ️ About Us</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="content">
-            <div class="post-container">
-                <div class="post create-post">
-                    <h2>Create a Post</h2>
-                    <input type="text" id="post-title" placeholder="Post title">
-                    <textarea id="post-content" placeholder="Write something..."></textarea>
-                    <button onclick="createPost()">Post</button>
-                </div>
+            <div class="create-post">
+                <h2>Create a Post</h2>
+                <input type="text" id="post-title" placeholder="Post title">
+                <textarea id="post-content" placeholder="Write something..."></textarea>
+                <button onclick="createPost()">Post</button>
             </div>
             <div id="post-container" class="post-container"></div>
         </main>
     </div>
-
-    <aside class="right-panel hidden" id="right-panel">
-        <button onclick="toggleRightPanel()">Close</button>
-        <h3>Profile Info</h3>
-        <p>Some user details...</p>
-    </aside>
 </body>
 
 </html>
-
-<script>
-    function createPost() {
-        let title = document.getElementById('post-title').value;
-        let content = document.getElementById('post-content').value;
-
-        if (title.trim() === '' || content.trim() === '') {
-            alert('Title and content cannot be empty!');
-            return;
-        }
-
-        let postContainer = document.getElementById('post-container');
-        let newPost = document.createElement('div');
-        newPost.classList.add('post');
-        newPost.innerHTML = `
-            <h3>${title}</h3>
-            <p>${content}</p>
-            <div class="post-actions">
-                <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
-                <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
-                <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
-            </div>
-            <div class="comment-section hidden">
-                <input type="text" class="comment-input" placeholder="Write a comment...">
-                <button onclick="addComment(this)">Post</button>
-                <div class="comments"></div>
-            </div>
-        `;
-        postContainer.prepend(newPost);
-        document.getElementById('post-title').value = '';
-        document.getElementById('post-content').value = '';
-    }
-</script>
-
-<style>
-    .hidden {
-        display: none;
-    }
-
-    .post {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        margin-bottom: 15px;
-        width: 60%;
-        max-width: 800px;
-    }
-
-    .post-actions {
-        display: flex;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    .comment-section {
-        margin-top: 10px;
-    }
-
-    .comment {
-        background: #f1f1f1;
-        padding: 5px;
-        margin-top: 5px;
-        border-radius: 5px;
-    }
-</style>
 
 <style>
     body {
@@ -142,9 +68,6 @@
         margin: 0;
         padding: 0;
         background-color: #F5F1E9;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
     }
 
     .navbar {
@@ -165,7 +88,6 @@
 
     .container {
         display: flex;
-        flex: 1;
     }
 
     .sidebar {
@@ -225,4 +147,48 @@
         border-radius: 5px;
         cursor: pointer;
     }
+
+    .post-container {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .post {
+        background: white;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+        width: 100%;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
 </style>
+
+<script>
+    function createPost() {
+        let title = document.getElementById('post-title').value;
+        let content = document.getElementById('post-content').value;
+
+        if (title.trim() === '' || content.trim() === '') {
+            alert('Title and content cannot be empty!');
+            return;
+        }
+
+        let postContainer = document.getElementById('post-container');
+        let newPost = document.createElement('div');
+        newPost.classList.add('post');
+        newPost.innerHTML = `
+            <h3>${title}</h3>
+            <p>${content}</p>
+            <div class="post-footer">
+                <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
+                <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
+                <button class="share-btn">🔗 Share</button>
+            </div>
+        `;
+        postContainer.prepend(newPost);
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-content').value = '';
+    }
+</script>
