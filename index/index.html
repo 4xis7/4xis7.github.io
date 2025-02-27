@@ -26,7 +26,7 @@
             <nav>
                 <ul>
                     <li><a href="home.html">🏠 Home</a></li>
-                    <li><a href="popular.html">🔥 Popular</a></li>
+                    <li><a href="popular.html">🔥 Popular Title</a></li>
                     <li><a href="content.html">🌎 All Content</a></li>
                     <li><a href="feed.html">📌 My Feed</a></li>
                     <li><a href="chat.html">💬 Chat Rooms</a></li>
@@ -62,6 +62,93 @@
 
 </html>
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #F5F1E9;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: #006400;
+        color: white;
+    }
+
+    .search-bar {
+        padding: 5px;
+        width: 300px;
+        border-radius: 4px;
+        border: none;
+    }
+
+    .container {
+        display: flex;
+    }
+
+    .sidebar {
+        width: 250px;
+        background: white;
+        padding: 15px;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin: 10px 0;
+    }
+
+    .sidebar ul li a {
+        text-decoration: none;
+        color: black;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .content {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .create-post {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        width: 60%;
+        margin-bottom: 20px;
+    }
+
+    .create-post input,
+    .create-post textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .create-post button {
+        background: #006400;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
 <script>
     function toggleSidebar() {
         document.querySelector(".sidebar").classList.toggle("collapsed");
@@ -74,70 +161,4 @@
     function navigateTo(page) {
         window.location.href = page;
     }
-
-    function createPost() {
-        let title = document.getElementById('post-title').value;
-        let content = document.getElementById('post-content').value;
-
-        if (title.trim() === '' || content.trim() === '') {
-            alert('Title and content cannot be empty!');
-            return;
-        }
-
-        let postContainer = document.getElementById('post-container');
-        let newPost = document.createElement('div');
-        newPost.classList.add('post');
-        newPost.innerHTML = `
-            <h3>${title}</h3>
-            <p>${content}</p>
-            <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
-            <div class="comment-section hidden">
-                <input type="text" class="comment-input" placeholder="Write a comment...">
-                <button onclick="addComment(this)">Post</button>
-                <div class="comments"></div>
-            </div>
-        `;
-        postContainer.prepend(newPost);
-        document.getElementById('post-title').value = '';
-        document.getElementById('post-content').value = '';
-    }
-
-    function openCommentSection(button) {
-        button.nextElementSibling.classList.toggle("hidden");
-    }
-
-    function addComment(button) {
-        let input = button.previousElementSibling;
-        let commentText = input.value.trim();
-        if (commentText === '') return;
-
-        let commentDiv = document.createElement('div');
-        commentDiv.classList.add('comment');
-        commentDiv.textContent = commentText;
-
-        button.parentElement.querySelector(".comments").appendChild(commentDiv);
-        input.value = '';
-    }
 </script>
-
-<style>
-    .hidden {
-        display: none;
-    }
-
-    .collapsed {
-        width: 50px;
-        overflow: hidden;
-    }
-
-    .comment-section {
-        margin-top: 10px;
-    }
-
-    .comment {
-        background: #f1f1f1;
-        padding: 5px;
-        margin-top: 5px;
-        border-radius: 5px;
-    }
-</style>
