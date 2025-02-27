@@ -12,12 +12,12 @@
 <body>
     <header class="navbar">
         <div class="menu-icon" onclick="toggleSidebar()">☰</div>
-        <div class="logo">Name</div>
         <input type="text" class="search-bar" placeholder="Search">
+        <div class="logo">Name</div>
         <div class="nav-icons">
             <button class="chat-btn" onclick="navigateTo('chat.html')">💬</button>
             <button class="notif-btn">🔔</button>
-            <div class="profile-icon" onclick="navigateTo('profile.html')"><img src="profile.jpg" alt="Profile"></div>
+            <div class="profile-icon" onclick="toggleRightPanel()"><img src="profile.jpg" alt="Profile"></div>
         </div>
     </header>
 
@@ -58,6 +58,12 @@
             <div id="post-container" class="post-container"></div>
         </main>
     </div>
+
+    <aside class="right-panel hidden" id="right-panel">
+        <button onclick="toggleRightPanel()">Close</button>
+        <h3>Profile Info</h3>
+        <p>Some user details...</p>
+    </aside>
 </body>
 
 </html>
@@ -68,6 +74,9 @@
         margin: 0;
         padding: 0;
         background-color: #F5F1E9;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 
     .navbar {
@@ -88,6 +97,7 @@
 
     .container {
         display: flex;
+        flex: 1;
     }
 
     .sidebar {
@@ -148,17 +158,3 @@
         cursor: pointer;
     }
 </style>
-
-<script>
-    function toggleSidebar() {
-        document.querySelector(".sidebar").classList.toggle("collapsed");
-    }
-
-    function toggleCategory() {
-        document.getElementById("category-list").classList.toggle("hidden");
-    }
-
-    function navigateTo(page) {
-        window.location.href = page;
-    }
-</script>
