@@ -49,8 +49,8 @@
         </aside>
 
         <main class="content">
-            <div class="post-box">
-                <div class="create-post">
+            <div class="post-container">
+                <div class="post create-post">
                     <h2>Create a Post</h2>
                     <input type="text" id="post-title" placeholder="Post title">
                     <textarea id="post-content" placeholder="Write something..."></textarea>
@@ -82,7 +82,7 @@
 
         let postContainer = document.getElementById('post-container');
         let newPost = document.createElement('div');
-        newPost.classList.add('post', 'post-box');
+        newPost.classList.add('post');
         newPost.innerHTML = `
             <h3>${title}</h3>
             <p>${content}</p>
@@ -108,7 +108,7 @@
         display: none;
     }
 
-    .post-box {
+    .post {
         background: white;
         padding: 20px;
         border-radius: 8px;
