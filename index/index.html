@@ -15,7 +15,6 @@
         <div class="logo">Name</div>
         <input type="text" class="search-bar" placeholder="Search">
         <div class="nav-icons">
-            <button class="post-btn" onclick="openPostModal()">+</button>
             <button class="chat-btn">💬</button>
             <button class="notif-btn">🔔</button>
             <div class="profile-icon"><img src="profile.jpg" alt="Profile"></div>
@@ -50,18 +49,14 @@
         </aside>
 
         <main class="content">
-            <div id="post-container"></div>
+            <div class="create-post">
+                <h2>Create a Post</h2>
+                <input type="text" id="post-title" placeholder="Post title">
+                <textarea id="post-content" placeholder="Write something..."></textarea>
+                <button onclick="createPost()">Post</button>
+            </div>
+            <div id="post-container" class="post-container"></div>
         </main>
-    </div>
-
-    <div id="post-modal" class="modal">
-        <div class="modal-content">
-            <h2>Create a Post</h2>
-            <input type="text" id="post-title" placeholder="Post title">
-            <textarea id="post-content" placeholder="Write something..."></textarea>
-            <button onclick="createPost()">Post</button>
-            <button onclick="closePostModal()">Cancel</button>
-        </div>
     </div>
 </body>
 
@@ -121,23 +116,56 @@
     .content {
         flex: 1;
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .create-post {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        width: 60%;
+        margin-bottom: 20px;
+    }
+
+    .create-post input,
+    .create-post textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .create-post button {
+        background: #006400;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .post-container {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .post {
+        background: white;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+        width: 100%;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
 </style>
 
 <script>
-    function toggleSidebar() {
-        const sidebar = document.querySelector(".sidebar");
-        sidebar.classList.toggle("active");
-    }
-
-    function openPostModal() {
-        document.getElementById('post-modal').style.display = 'flex';
-    }
-
-    function closePostModal() {
-        document.getElementById('post-modal').style.display = 'none';
-    }
-
     function createPost() {
         let title = document.getElementById('post-title').value;
         let content = document.getElementById('post-content').value;
@@ -160,18 +188,7 @@
             </div>
         `;
         postContainer.prepend(newPost);
-        closePostModal();
         document.getElementById('post-title').value = '';
         document.getElementById('post-content').value = '';
-    }
-
-    function upvote(button) {
-        let score = parseInt(button.textContent.split(' ')[1]);
-        button.textContent = `⬆ ${score + 1}`;
-    }
-
-    function downvote(button) {
-        let score = parseInt(button.textContent.split(' ')[1]);
-        button.textContent = `⬇ ${score - 1}`;
     }
 </script>
