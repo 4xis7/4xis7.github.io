@@ -15,9 +15,9 @@
         <div class="logo">Name</div>
         <input type="text" class="search-bar" placeholder="Search">
         <div class="nav-icons">
-            <button class="chat-btn">💬</button>
+            <button class="chat-btn" onclick="goToPage('chat.html')">💬</button>
             <button class="notif-btn">🔔</button>
-            <div class="profile-icon"><img src="profile.jpg" alt="Profile"></div>
+            <div class="profile-icon" onclick="goToPage('profile.html')"><img src="profile.jpg" alt="Profile"></div>
         </div>
     </header>
 
@@ -25,14 +25,13 @@
         <aside class="sidebar">
             <nav>
                 <ul>
-                    <li><a href="#">🏠 Home</a></li>
-                    <li><a href="#">🔥 Popular Title</a></li>
-                    <li><a href="#">🌎 All Content</a></li>
-                    <li><a href="#">📌 My Feed</a></li>
-                    <li><a href="#">💬 Chat Rooms</a></li>
-                    <li class="category">
-                        <span>📂 Category</span>
-                        <ul>
+                    <li><a href="#" onclick="goToPage('home.html')">🏠 Home</a></li>
+                    <li><a href="#" onclick="goToPage('popular.html')">🔥 Popular Title</a></li>
+                    <li><a href="#" onclick="goToPage('content.html')">🌎 All Content</a></li>
+                    <li><a href="#" onclick="goToPage('feed.html')">📌 My Feed</a></li>
+                    <li><a href="#" onclick="goToPage('chat.html')">💬 Chat Rooms</a></li>
+                    <li><a href="#" onclick="toggleCategory()">📂 Category ▼</a>
+                        <ul id="category-list" class="hidden">
                             <li><a href="#">📺 Anime</a></li>
                             <li><a href="#">📚 Books</a></li>
                             <li><a href="#">🎓 Learning</a></li>
@@ -42,8 +41,8 @@
                             <li><a href="#">⚽ Sports</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">⚖ Rules</a></li>
-                    <li><a href="#">ℹ️ About Us</a></li>
+                    <li><a href="#" onclick="goToPage('rules.html')">⚖ Rules</a></li>
+                    <li><a href="#" onclick="goToPage('about.html')">ℹ️ About Us</a></li>
                 </ul>
             </nav>
         </aside>
@@ -62,110 +61,21 @@
 
 </html>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #F5F1E9;
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background: #006400;
-        color: white;
-    }
-
-    .search-bar {
-        padding: 5px;
-        width: 300px;
-        border-radius: 4px;
-        border: none;
-    }
-
-    .container {
-        display: flex;
-    }
-
-    .sidebar {
-        width: 250px;
-        background: white;
-        padding: 15px;
-    }
-
-    .sidebar ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .sidebar ul li {
-        margin: 10px 0;
-    }
-
-    .sidebar ul li a {
-        text-decoration: none;
-        color: black;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .content {
-        flex: 1;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .create-post {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        width: 60%;
-        margin-bottom: 20px;
-    }
-
-    .create-post input,
-    .create-post textarea {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .create-post button {
-        background: #006400;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .post-container {
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .post {
-        background: white;
-        padding: 15px;
-        margin: 15px 0;
-        border-radius: 8px;
-        width: 100%;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-</style>
-
 <script>
+    function toggleSidebar() {
+        const sidebar = document.querySelector(".sidebar");
+        sidebar.classList.toggle("collapsed");
+    }
+
+    function toggleCategory() {
+        const categoryList = document.getElementById("category-list");
+        categoryList.classList.toggle("hidden");
+    }
+
+    function goToPage(page) {
+        window.location.href = page;
+    }
+
     function createPost() {
         let title = document.getElementById('post-title').value;
         let content = document.getElementById('post-content').value;
@@ -181,14 +91,56 @@
         newPost.innerHTML = `
             <h3>${title}</h3>
             <p>${content}</p>
-            <div class="post-footer">
-                <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
-                <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
-                <button class="share-btn">🔗 Share</button>
+            <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
+            <div class="comment-section hidden">
+                <input type="text" class="comment-input" placeholder="Write a comment...">
+                <button onclick="addComment(this)">Post</button>
+                <div class="comments"></div>
             </div>
         `;
         postContainer.prepend(newPost);
         document.getElementById('post-title').value = '';
         document.getElementById('post-content').value = '';
     }
+
+    function openCommentSection(button) {
+        const commentSection = button.nextElementSibling;
+        commentSection.classList.toggle("hidden");
+    }
+
+    function addComment(button) {
+        const input = button.previousElementSibling;
+        const commentText = input.value.trim();
+        if (commentText === '') return;
+
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        commentDiv.textContent = commentText;
+
+        const commentSection = button.parentElement.querySelector(".comments");
+        commentSection.appendChild(commentDiv);
+        input.value = '';
+    }
 </script>
+
+<style>
+    .hidden {
+        display: none;
+    }
+
+    .collapsed {
+        width: 50px;
+        overflow: hidden;
+    }
+
+    .comment-section {
+        margin-top: 10px;
+    }
+
+    .comment {
+        background: #f1f1f1;
+        padding: 5px;
+        margin-top: 5px;
+        border-radius: 5px;
+    }
+</style>
