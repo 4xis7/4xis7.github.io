@@ -4,16 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAME</title>
+    <title>Reddit Clone</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
     <header class="navbar">
-        <div class="logo">Reddit Clone</div>
-        <input type="text" class="search-bar" placeholder="Search posts...">
-        <button class="add-post" onclick="openPostModal()">+ New Post</button>
-        <div class="profile-icon">👤</div>
+        <div class="menu-icon">☰</div>
+        <div class="logo">Name</div>
+        <input type="text" class="search-bar" placeholder="Search">
+        <div class="nav-icons">
+            <button class="post-btn">+</button>
+            <button class="chat-btn">💬</button>
+            <button class="notif-btn">🔔</button>
+            <div class="profile-icon"><img src="profile.jpg" alt="Profile"></div>
+        </div>
     </header>
 
     <div class="container">
@@ -21,93 +27,112 @@
             <nav>
                 <ul>
                     <li><a href="#">🏠 Home</a></li>
-                    <li><a href="#">🔥 Popular</a></li>
+                    <li><a href="#">🔥 Popular Title</a></li>
                     <li><a href="#">🌎 All Content</a></li>
                     <li><a href="#">📌 My Feed</a></li>
-                    <li><a href="#">💬 Chat Room</a></li>
-                    <li><a href="#">📂 Category</a></li>
+                    <li><a href="#">💬 Chat Rooms</a></li>
+                    <li class="category">
+                        <span>📂 Category</span>
+                        <ul>
+                            <li><a href="#">📺 Anime</a></li>
+                            <li><a href="#">📚 Books</a></li>
+                            <li><a href="#">🎓 Learning</a></li>
+                            <li><a href="#">🎬 Movie</a></li>
+                            <li><a href="#">🎵 Musics</a></li>
+                            <li><a href="#">📰 News</a></li>
+                            <li><a href="#">⚽ Sports</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">⚖ Rules</a></li>
                     <li><a href="#">ℹ️ About Us</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="content">
-            <h1>Trending Posts</h1>
             <div id="post-container"></div>
         </main>
     </div>
-
-    <div id="post-modal" class="modal">
-        <div class="modal-content">
-            <h2>Create a Post</h2>
-            <input type="text" id="post-title" placeholder="Post title">
-            <textarea id="post-content" placeholder="Write something..."></textarea>
-            <button onclick="createPost()">Post</button>
-            <button onclick="closePostModal()">Cancel</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 
 </html>
 
 <style>
-    .modal {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-        align-items: center;
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #F5F1E9;
     }
 
-    .modal-content {
-        background: white;
-        padding: 20px;
-        border-radius: 5px;
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: #006400;
+        color: white;
+    }
+
+    .search-bar {
+        padding: 5px;
         width: 300px;
-        text-align: center;
+        border-radius: 4px;
+        border: none;
+    }
+
+    .container {
+        display: flex;
+    }
+
+    .sidebar {
+        width: 220px;
+        background: white;
+        padding: 15px;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin: 10px 0;
+    }
+
+    .sidebar ul li a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .content {
+        flex: 1;
+        padding: 20px;
     }
 </style>
 
 <script>
-    function openPostModal() {
-        document.getElementById('post-modal').style.display = 'flex';
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+        const postContainer = document.getElementById("post-container");
+        const samplePosts = [];
 
-    function closePostModal() {
-        document.getElementById('post-modal').style.display = 'none';
-    }
-
-    function createPost() {
-        let title = document.getElementById('post-title').value;
-        let content = document.getElementById('post-content').value;
-
-        if (title.trim() === '' || content.trim() === '') {
-            alert('Title and content cannot be empty!');
-            return;
-        }
-
-        let postContainer = document.getElementById('post-container');
-        let newPost = document.createElement('div');
-        newPost.classList.add('post');
-        newPost.innerHTML = `
-            <h3>${title}</h3>
-            <p>${content}</p>
-            <div class="post-footer">
-                <button class="vote upvote">⬆</button>
-                <span class="score">0</span>
-                <button class="vote downvote">⬇</button>
-                <button class="comment-btn">💬 Comment</button>
-            </div>
-        `;
-        postContainer.prepend(newPost);
-        closePostModal();
-        document.getElementById('post-title').value = '';
-        document.getElementById('post-content').value = '';
-    }
+        samplePosts.forEach(post => {
+            const postElement = document.createElement("div");
+            postElement.classList.add("post");
+            postElement.innerHTML = `
+                <div class="post-header">
+                    <span class="username">👤 ${post.username}</span>
+                    <span class="category">${post.category}</span>
+                    <p>${post.content}</p>
+                </div>
+                ${post.image ? `<img src="${post.image}" class="post-image" alt="Post Image">` : ""}
+                <div class="post-footer">
+                    <button class="vote upvote">⬆ ${post.upvotes}</button>
+                    <button class="vote downvote">⬇ ${post.downvotes}</button>
+                    <button class="share-btn">🔗 Share</button>
+                </div>
+            `;
+            postContainer.appendChild(postElement);
+        });
+    });
 </script>
