@@ -15,9 +15,9 @@
         <div class="logo">Name</div>
         <input type="text" class="search-bar" placeholder="Search">
         <div class="nav-icons">
-            <button class="chat-btn">💬</button>
-            <button class="notif-btn">🔔</button>
-            <div class="profile-icon"><img src="profile.jpg" alt="Profile"></div>
+            <button class="chat-btn" onclick="navigateTo('chat.html')">💬</button>
+            <button class="notif-btn" onclick="navigateTo('notifications.html')">🔔</button>
+            <div class="profile-icon" onclick="navigateTo('profile.html')"><img src="profile.jpg" alt="Profile"></div>
         </div>
     </header>
 
@@ -25,25 +25,25 @@
         <aside class="sidebar">
             <nav>
                 <ul>
-                    <li><a href="#">🏠 Home</a></li>
-                    <li><a href="#">🔥 Popular Title</a></li>
-                    <li><a href="#">🌎 All Content</a></li>
-                    <li><a href="#">📌 My Feed</a></li>
-                    <li><a href="#">💬 Chat Rooms</a></li>
+                    <li><a href="home.html">🏠 Home</a></li>
+                    <li><a href="popular.html">🔥 Popular Title</a></li>
+                    <li><a href="content.html">🌎 All Content</a></li>
+                    <li><a href="feed.html">📌 My Feed</a></li>
+                    <li><a href="chat.html">💬 Chat Rooms</a></li>
                     <li class="category">
-                        <span>📂 Category</span>
-                        <ul>
-                            <li><a href="#">📺 Anime</a></li>
-                            <li><a href="#">📚 Books</a></li>
-                            <li><a href="#">🎓 Learning</a></li>
-                            <li><a href="#">🎬 Movie</a></li>
-                            <li><a href="#">🎵 Musics</a></li>
-                            <li><a href="#">📰 News</a></li>
-                            <li><a href="#">⚽ Sports</a></li>
+                        <span onclick="toggleCategory()">📂 Category</span>
+                        <ul id="category-list" class="hidden">
+                            <li><a href="anime.html">📺 Anime</a></li>
+                            <li><a href="books.html">📚 Books</a></li>
+                            <li><a href="learning.html">🎓 Learning</a></li>
+                            <li><a href="movies.html">🎬 Movie</a></li>
+                            <li><a href="music.html">🎵 Musics</a></li>
+                            <li><a href="news.html">📰 News</a></li>
+                            <li><a href="sports.html">⚽ Sports</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">⚖ Rules</a></li>
-                    <li><a href="#">ℹ️ About Us</a></li>
+                    <li><a href="rules.html">⚖ Rules</a></li>
+                    <li><a href="about.html">ℹ️ About Us</a></li>
                 </ul>
             </nav>
         </aside>
@@ -61,6 +61,68 @@
 </body>
 
 </html>
+
+<script>
+    function toggleSidebar() {
+        document.querySelector(".sidebar").classList.toggle("collapsed");
+    }
+
+    function toggleCategory() {
+        document.getElementById("category-list").classList.toggle("hidden");
+    }
+
+    function navigateTo(page) {
+        window.location.href = page;
+    }
+
+    function createPost() {
+        let title = document.getElementById('post-title').value;
+        let content = document.getElementById('post-content').value;
+
+        if (title.trim() === '' || content.trim() === '') {
+            alert('Title and content cannot be empty!');
+            return;
+        }
+
+        let postContainer = document.getElementById('post-container');
+        let newPost = document.createElement('div');
+        newPost.classList.add('post');
+        newPost.innerHTML = `
+            <h3>${title}</h3>
+            <p>${content}</p>
+            <div class="post-footer">
+                <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
+                <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
+                <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
+            </div>
+            <div class="comment-section hidden">
+                <input type="text" class="comment-input" placeholder="Write a comment...">
+                <button onclick="addComment(this)">Post</button>
+                <div class="comments"></div>
+            </div>
+        `;
+        postContainer.prepend(newPost);
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-content').value = '';
+    }
+
+    function openCommentSection(button) {
+        button.nextElementSibling.classList.toggle("hidden");
+    }
+
+    function addComment(button) {
+        let input = button.previousElementSibling;
+        let commentText = input.value.trim();
+        if (commentText === '') return;
+
+        let commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        commentDiv.textContent = commentText;
+
+        button.parentElement.querySelector(".comments").appendChild(commentDiv);
+        input.value = '';
+    }
+</script>
 
 <style>
     body {
