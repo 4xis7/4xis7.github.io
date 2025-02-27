@@ -15,9 +15,9 @@
         <div class="logo">Name</div>
         <input type="text" class="search-bar" placeholder="Search">
         <div class="nav-icons">
-            <button class="chat-btn" onclick="goToPage('chat.html')">💬</button>
+            <button class="chat-btn" onclick="navigateTo('chat.html')">💬</button>
             <button class="notif-btn">🔔</button>
-            <div class="profile-icon" onclick="goToPage('profile.html')"><img src="profile.jpg" alt="Profile"></div>
+            <div class="profile-icon" onclick="navigateTo('profile.html')"><img src="profile.jpg" alt="Profile"></div>
         </div>
     </header>
 
@@ -25,12 +25,13 @@
         <aside class="sidebar">
             <nav>
                 <ul>
-                    <li><a href="#" onclick="goToPage('home.html')">🏠 Home</a></li>
-                    <li><a href="#" onclick="goToPage('popular.html')">🔥 Popular Title</a></li>
-                    <li><a href="#" onclick="goToPage('content.html')">🌎 All Content</a></li>
-                    <li><a href="#" onclick="goToPage('feed.html')">📌 My Feed</a></li>
-                    <li><a href="#" onclick="goToPage('chat.html')">💬 Chat Rooms</a></li>
-                    <li><a href="#" onclick="toggleCategory()">📂 Category ▼</a>
+                    <li><a href="#" onclick="navigateTo('home.html')">🏠 Home</a></li>
+                    <li><a href="#" onclick="navigateTo('popular.html')">🔥 Popular</a></li>
+                    <li><a href="#" onclick="navigateTo('content.html')">🌎 All Content</a></li>
+                    <li><a href="#" onclick="navigateTo('feed.html')">📌 My Feed</a></li>
+                    <li><a href="#" onclick="navigateTo('chat.html')">💬 Chat Rooms</a></li>
+                    <li class="category">
+                        <span onclick="toggleCategory()">📂 Category ▼</span>
                         <ul id="category-list" class="hidden">
                             <li><a href="#">📺 Anime</a></li>
                             <li><a href="#">📚 Books</a></li>
@@ -41,8 +42,8 @@
                             <li><a href="#">⚽ Sports</a></li>
                         </ul>
                     </li>
-                    <li><a href="#" onclick="goToPage('rules.html')">⚖ Rules</a></li>
-                    <li><a href="#" onclick="goToPage('about.html')">ℹ️ About Us</a></li>
+                    <li><a href="#" onclick="navigateTo('rules.html')">⚖ Rules</a></li>
+                    <li><a href="#" onclick="navigateTo('about.html')">ℹ️ About Us</a></li>
                 </ul>
             </nav>
         </aside>
@@ -63,16 +64,14 @@
 
 <script>
     function toggleSidebar() {
-        const sidebar = document.querySelector(".sidebar");
-        sidebar.classList.toggle("collapsed");
+        document.querySelector(".sidebar").classList.toggle("collapsed");
     }
 
     function toggleCategory() {
-        const categoryList = document.getElementById("category-list");
-        categoryList.classList.toggle("hidden");
+        document.getElementById("category-list").classList.toggle("hidden");
     }
 
-    function goToPage(page) {
+    function navigateTo(page) {
         window.location.href = page;
     }
 
@@ -104,21 +103,19 @@
     }
 
     function openCommentSection(button) {
-        const commentSection = button.nextElementSibling;
-        commentSection.classList.toggle("hidden");
+        button.nextElementSibling.classList.toggle("hidden");
     }
 
     function addComment(button) {
-        const input = button.previousElementSibling;
-        const commentText = input.value.trim();
+        let input = button.previousElementSibling;
+        let commentText = input.value.trim();
         if (commentText === '') return;
 
-        const commentDiv = document.createElement('div');
+        let commentDiv = document.createElement('div');
         commentDiv.classList.add('comment');
         commentDiv.textContent = commentText;
 
-        const commentSection = button.parentElement.querySelector(".comments");
-        commentSection.appendChild(commentDiv);
+        button.parentElement.querySelector(".comments").appendChild(commentDiv);
         input.value = '';
     }
 </script>
