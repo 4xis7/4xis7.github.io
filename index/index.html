@@ -68,6 +68,70 @@
 
 </html>
 
+<script>
+    function createPost() {
+        let title = document.getElementById('post-title').value;
+        let content = document.getElementById('post-content').value;
+
+        if (title.trim() === '' || content.trim() === '') {
+            alert('Title and content cannot be empty!');
+            return;
+        }
+
+        let postContainer = document.getElementById('post-container');
+        let newPost = document.createElement('div');
+        newPost.classList.add('post');
+        newPost.innerHTML = `
+            <h3>${title}</h3>
+            <p>${content}</p>
+            <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
+            <div class="comment-section hidden">
+                <input type="text" class="comment-input" placeholder="Write a comment...">
+                <button onclick="addComment(this)">Post</button>
+                <div class="comments"></div>
+            </div>
+        `;
+        postContainer.prepend(newPost);
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-content').value = '';
+    }
+
+    function openCommentSection(button) {
+        button.nextElementSibling.classList.toggle("hidden");
+    }
+
+    function addComment(button) {
+        let input = button.previousElementSibling;
+        let commentText = input.value.trim();
+        if (commentText === '') return;
+
+        let commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        commentDiv.textContent = commentText;
+
+        button.parentElement.querySelector(".comments").appendChild(commentDiv);
+        input.value = '';
+    }
+</script>
+
+<style>
+    .hidden {
+        display: none;
+    }
+
+    .comment-section {
+        margin-top: 10px;
+    }
+
+    .comment {
+        background: #f1f1f1;
+        padding: 5px;
+        margin-top: 5px;
+        border-radius: 5px;
+    }
+</style>
+
+
 <style>
     body {
         font-family: Arial, sans-serif;
