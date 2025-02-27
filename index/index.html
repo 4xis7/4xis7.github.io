@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">Reddit Clone</div>
+        <input type="text" class="search-bar" placeholder="Search...">
+        <button class="add-post">+ Add Post</button>
+        <div class="profile-icon">👤</div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Popular</a></li>
+                    <li><a href="#">All Content</a></li>
+                    <li><a href="#">My Feed</a></li>
+                    <li><a href="#">Chat Room</a></li>
+                    <li><a href="#">Category</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <h1>Home</h1>
+            <div class="post">
+                <div class="post-header">
+                    <span>👤 User1</span> | <span>2h ago</span>
+                </div>
+                <p>This is a Reddit-style post!</p>
+                <img src="https://via.placeholder.com/600x300" alt="Post Image">
+                <div class="post-footer">
+                    <button class="vote upvote">⬆</button>
+                    <span class="score">10</span>
+                    <button class="vote downvote">⬇</button>
+                    <button class="comment-btn">💬 Comment</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
