@@ -49,11 +49,13 @@
         </aside>
 
         <main class="content">
-            <div class="create-post">
-                <h2>Create a Post</h2>
-                <input type="text" id="post-title" placeholder="Post title">
-                <textarea id="post-content" placeholder="Write something..."></textarea>
-                <button onclick="createPost()">Post</button>
+            <div class="post-box">
+                <div class="create-post">
+                    <h2>Create a Post</h2>
+                    <input type="text" id="post-title" placeholder="Post title">
+                    <textarea id="post-content" placeholder="Write something..."></textarea>
+                    <button onclick="createPost()">Post</button>
+                </div>
             </div>
             <div id="post-container" class="post-container"></div>
         </main>
@@ -80,22 +82,19 @@
 
         let postContainer = document.getElementById('post-container');
         let newPost = document.createElement('div');
-        newPost.classList.add('post');
+        newPost.classList.add('post', 'post-box');
         newPost.innerHTML = `
-            <div class="post-header"></div>
-            <div class="post-content">
-                <h3>${title}</h3>
-                <p>${content}</p>
-                <div class="post-actions">
-                    <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
-                    <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
-                    <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
-                </div>
-                <div class="comment-section hidden">
-                    <input type="text" class="comment-input" placeholder="Write a comment...">
-                    <button onclick="addComment(this)">Post</button>
-                    <div class="comments"></div>
-                </div>
+            <h3>${title}</h3>
+            <p>${content}</p>
+            <div class="post-actions">
+                <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
+                <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
+                <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
+            </div>
+            <div class="comment-section hidden">
+                <input type="text" class="comment-input" placeholder="Write a comment...">
+                <button onclick="addComment(this)">Post</button>
+                <div class="comments"></div>
             </div>
         `;
         postContainer.prepend(newPost);
