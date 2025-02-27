@@ -84,6 +84,8 @@
         newPost.innerHTML = `
             <h3>${title}</h3>
             <p>${content}</p>
+            <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
+            <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
             <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
             <div class="comment-section hidden">
                 <input type="text" class="comment-input" placeholder="Write a comment...">
@@ -111,6 +113,16 @@
 
         button.parentElement.querySelector(".comments").appendChild(commentDiv);
         input.value = '';
+    }
+
+    function upvote(button) {
+        let score = parseInt(button.textContent.split(' ')[1]);
+        button.textContent = `⬆ ${score + 1}`;
+    }
+
+    function downvote(button) {
+        let score = parseInt(button.textContent.split(' ')[1]);
+        button.textContent = `⬇ ${score - 1}`;
     }
 </script>
 
