@@ -9,16 +9,39 @@
     <style>
         body {
             background-color: rgb(255, 255, 255);
-            /* เปลี่ยนพื้นหลังเป็นสีขาว */
         }
 
         .container {
             background: white;
             padding: 40px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            /* เพิ่มขอบเงา */
             border-radius: 15px;
-            /* ทำให้ขอบมน */
+            text-align: center;
+        }
+
+        .app-image img {
+            max-width: 60%;
+            /* ปรับขนาดให้พอดีกับหน้าเว็บ */
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            margin-top: 20px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .download-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -38,18 +61,16 @@
             <div class="description">
                 <h2>What is My App?</h2>
                 <p>Ween App เป็นแอพสร้างขึ่นเพื่อใช้ในการตั้งหัวข้อเรื่อต่างๆ เช่น ตั้งคำถาม ประสบการณ์ที่ไปพบเจอ
-                เพื่อเป็นศูนย์รวมแหล่งความรู้ที่ผู้ใช้งานอยากรู้หรืออยากแชร์ให้กับผู้ใช้งานคนอื่นๆ
-                และเป็นการแลกเปลี่ยนความคิดเห็นกันระหว่างผู้ใช้งาน
-                </p>
+                    เพื่อเป็นศูนย์รวมแหล่งความรู้ที่ผู้ใช้งานอยากรู้หรืออยากแชร์ให้กับผู้ใช้งานคนอื่นๆ
+                    และเป็นการแลกเปลี่ยนความคิดเห็นกันระหว่างผู้ใช้งาน</p>
                 <h2>Key Features</h2>
                 <ul>
                     <li>Feature 1 - ตั้งหัวข้อเพื่อพูดคุย/แชร์ประสบการณ์กันและกันระหว่างผู้ใช้งาน</li>
-                    <li>Feature 2 - มีห้องแชทสำหรับการพูดคุยถกกันระหว่างผู้ใช่้งาน</li>
-                    <li>Feature 3 - มีการแยกหมวดหมู่ของหัวข้อเรื่องที่ผู้ใช้งานโพสค์</li>
+                    <li>Feature 2 - มีห้องแชทสำหรับการพูดคุยถกกันระหว่างผู้ใช้งาน</li>
+                    <li>Feature 3 - มีการแยกหมวดหมู่ของหัวข้อเรื่องที่ผู้ใช้งานโพสต์</li>
                 </ul>
                 <h2>Why Choose My App?</h2>
-                <p>มีระบบการใช้งานที่เข้าใจง่าย มีห้องแชทใช้สำหรับการถกกันของผู้งาน
-                </p>
+                <p>มีระบบการใช้งานที่เข้าใจง่าย มีห้องแชทใช้สำหรับการถกกันของผู้ใช้งาน</p>
             </div>
             <a href="download_link_here" class="download-btn">Download Now</a>
             <div class="footer">
