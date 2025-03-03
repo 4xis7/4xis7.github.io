@@ -108,41 +108,39 @@
         }
     </style>
 </head>
-
 <body>
     <div class="sidebar">
-        <button onclick="window.location.href='index.html'">Introduce</button>
-        <button onclick="window.location.href='about.html'">About Us</button>
+        <button onclick="showSection('introduce')">Introduce</button>
+        <button onclick="showSection('about-us')">About Us</button>
     </div>
 
-    <div class="content-container">
-        <div class="container">
-            <div class="header">Ween App</div>
-            <div class="app-image">
-                <img src="W.png" alt="App Screenshot">
-            </div>
-            <div class="description">
-                <h2>What is My App?</h2>
-                <p>My App is an innovative application designed to solve [problem your app addresses]. With an intuitive
-                    interface and powerful features, My App provides users with a seamless experience in [app function].
-                </p>
-                <h2>Key Features</h2>
-                <ul>
-                    <li>Feature 1 - Describe its functionality.</li>
-                    <li>Feature 2 - How it benefits users.</li>
-                    <li>Feature 3 - Why it stands out.</li>
-                </ul>
-                <h2>Why Choose My App?</h2>
-                <p>If you're struggling with [problem], My App is the perfect solution, offering [unique selling
-                    points].
-                </p>
-            </div>
-            <a href="download_link_here" class="download-btn">Download Now</a>
-            <div class="footer">
-                <p>Developed by: [Your Name]</p>
-                <p>Contact: [Your Email]</p>
-            </div>
+    <div class="container" id="introduce">
+        <div class="header">Ween App</div>
+        <div class="app-image">
+            <img src="W.png" alt="App Screenshot">
         </div>
+        <div class="description">
+            <h2>What is My App?</h2>
+            <p>My App is an innovative application designed to solve [problem your app addresses]. With an intuitive
+                interface and powerful features, My App provides users with a seamless experience in [app function].</p>
+
+            <h2>Key Features</h2>
+            <ul>
+                <li>Feature 1 - Describe its functionality.</li>
+                <li>Feature 2 - How it benefits users.</li>
+                <li>Feature 3 - Why it stands out.</li>
+            </ul>
+
+            <h2>Why Choose My App?</h2>
+            <p>If you're struggling with [problem], My App is the perfect solution, offering [unique selling points].
+            </p>
+        </div>
+        <a href="download_link_here" class="download-btn">Download Now</a>
+        <div class="footer">
+            <p>Developed by: [Your Name]</p>
+            <p>Contact: [Your Email]</p>
+        </div>
+    </div>
 
     <div class="container" id="about-us" style="display: none;">
         <div class="header">About Us</div>
@@ -168,5 +166,7 @@
         }
     </script>
 </body>
+
+</html>
 
 </html>
