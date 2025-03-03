@@ -4,128 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ween App</title>
+    <title>Recommended Apps</title>
     <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <div class="container">
-        <div class="header">Ween App</div>
-        <div class="post-box">
-            <input type="text" id="post-input" placeholder="Post your message">
-            <button onclick="postMessage()">Post</button>
-        </div>
-        <div class="post-list" id="post-list"></div>
-        <div class="nav-bar">
-            <button onclick="showScreen('home')">Home</button>
-            <button onclick="showScreen('chatrooms')">Chat Rooms</button>
-            <button onclick="showScreen('profile')">Profile</button>
-        </div>
-    </div>
-
-    <script>
-        function postMessage() {
-            let input = document.getElementById("post-input").value;
-            if (input.trim() === "") {
-                alert("Please enter a message!");
-                return;
-            }
-            let postList = document.getElementById("post-list");
-            let newPost = document.createElement("div");
-            newPost.classList.add("post");
-            newPost.innerHTML = `<p>${input}</p>`;
-            postList.appendChild(newPost);
-            document.getElementById("post-input").value = "";
-        }
-    </script>
-
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
 
         .container {
-            width: 90%;
-            max-width: 600px;
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
             background: white;
+            padding: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            overflow: hidden;
             text-align: center;
         }
 
         .header {
             background-color: #333;
             color: white;
-            text-align: center;
             padding: 15px;
-            font-size: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        .post-box {
+        .app-list {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
         }
 
-        .post-box input {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        .app-card {
+            width: 250px;
+            background: #fff;
+            padding: 15px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
         }
 
-        .post-box button {
-            padding: 10px 15px;
-            border: none;
-            background-color: #28a745;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .post-box button:hover {
-            background-color: #218838;
-        }
-
-        .post-list {
-            padding: 20px;
-        }
-
-        .nav-bar {
-            position: fixed;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            background: #333;
-            padding: 10px;
+        .app-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
             border-radius: 10px;
         }
 
-        .nav-bar button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            padding: 10px;
+        .app-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
         }
 
-        .nav-bar button:hover {
-            background: #555;
+        .app-card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .download-btn {
+            display: block;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .download-btn:hover {
+            background-color: #218838;
         }
     </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">Recommended Applications</div>
+        <div class="app-list" id="app-list">
+            <!-- Apps will be inserted here dynamically -->
+        </div>
+    </div>
+
+    <script>
+        const apps = [
+            { name: "ChatApp", image: "chatapp.png", description: "A fast and secure messaging app.", link: "#" },
+            { name: "TaskManager", image: "taskmanager.png", description: "Organize and track your tasks easily.", link: "#" },
+            { name: "MusicStream", image: "musicstream.png", description: "Enjoy unlimited music streaming.", link: "#" }
+        ];
+
+        const appList = document.getElementById("app-list");
+        apps.forEach(app => {
+            const appCard = document.createElement("div");
+            appCard.classList.add("app-card");
+            appCard.innerHTML = `
+                <img src="${app.image}" alt="${app.name}">
+                <h3>${app.name}</h3>
+                <p>${app.description}</p>
+                <a href="${app.link}" class="download-btn">Download</a>
+            `;
+            appList.appendChild(appCard);
+        });
+    </script>
 </body>
 
 </html>
