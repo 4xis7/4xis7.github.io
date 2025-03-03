@@ -9,174 +9,6 @@
 </head>
 
 <body>
-    <div id="home" class="screen active">
-        <div class="header">
-            <h1>Social App</h1>
-        </div>
-        <div class="post-box">
-            <input type="text" id="post-input" placeholder="Post your message">
-            <button onclick="postMessage()">Post</button>
-        </div>
-        <div class="post-list" id="post-list"></div>
-        <div class="nav-bar">
-            <button onclick="showScreen('home')">Home</button>
-            <button onclick="showScreen('chatrooms')">Chat Rooms</button>
-            <button onclick="showScreen('profile')">Profile</button>
-        </div>
-    </div>
-
-    <div id="chatrooms" class="screen">
-        <div class="header">
-            <h1>Chat Rooms</h1>
-        </div>
-        <button onclick="showScreen('home')">Home</button>
-        <button onclick="showScreen('profile')">Profile</button>
-    </div>
-
-    <div id="profile" class="screen">
-        <div class="header">
-            <h1>Profile</h1>
-        </div>
-        <button onclick="showScreen('home')">Home</button>
-        <button onclick="showScreen('chatrooms')">Chat Rooms</button>
-    </div>
-
-    <div id="comments" class="screen">
-        <div class="header">
-            <h1>Comments</h1>
-        </div>
-        <input type="text" id="comment-input" placeholder="Write a comment">
-        <button onclick="addComment()">Comment</button>
-        <div id="comment-list"></div>
-        <button onclick="showScreen('home')">Back</button>
-    </div>
-
-    <script>
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
-        }
-
-        function postMessage() {
-            let input = document.getElementById("post-input").value;
-            if (input.trim() === "") {
-                alert("Please enter a message!");
-                return;
-            }
-            let postList = document.getElementById("post-list");
-            let newPost = document.createElement("div");
-            newPost.classList.add("post");
-            newPost.innerHTML = `<p>${input}</p>
-                <button onclick='likePost()'>Like</button>
-                <button onclick='showScreen("comments")'>Comment</button>`;
-            postList.appendChild(newPost);
-            document.getElementById("post-input").value = "";
-        }
-
-        function likePost() {
-            alert("You liked this post!");
-        }
-
-        function addComment() {
-            let comment = document.getElementById("comment-input").value;
-            if (comment.trim() === "") {
-                alert("Please enter a comment!");
-                return;
-            }
-            let commentList = document.getElementById("comment-list");
-            let newComment = document.createElement("div");
-            newComment.textContent = comment;
-            commentList.appendChild(newComment);
-            document.getElementById("comment-input").value = "";
-        }
-    </script>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .container {
-        width: 90%;
-        max-width: 600px;
-        background: white;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        overflow: hidden;
-        text-align: center;
-    }
-
-    .header {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 15px;
-        font-size: 20px;
-    }
-
-    .post-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-    }
-
-    .post-box input {
-        width: 80%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .post-box button {
-        padding: 10px 15px;
-        border: none;
-        background-color: #28a745;
-        color: white;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-    .post-box button:hover {
-        background-color: #218838;
-    }
-
-    .post-list {
-        padding: 20px;
-    }
-
-    .nav-bar {
-        display: flex;
-        justify-content: space-around;
-        padding: 10px;
-        background: #333;
-    }
-
-    .nav-bar button {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-    .nav-bar button:hover {
-        text-decoration: underline;
-    }
-</style>
-</head>
-
-<body>
     <div class="container">
         <div class="header">Social App</div>
         <div class="post-box">
@@ -206,8 +38,94 @@
             document.getElementById("post-input").value = "";
         }
     </script>
-</body>
 
-</html>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 20px;
+        }
+
+        .post-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .post-box input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .post-box button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .post-box button:hover {
+            background-color: #218838;
+        }
+
+        .post-list {
+            padding: 20px;
+        }
+
+        .nav-bar {
+            position: fixed;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            background: #333;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .nav-bar button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .nav-bar button:hover {
+            background: #555;
+        }
+    </style>
+</body>
 
 </html>
