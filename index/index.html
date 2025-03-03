@@ -4,253 +4,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reddit Clone</title>
+    <title>Social App</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 
 <body>
-    <header class="navbar">
-        <div class="menu-icon" onclick="toggleSidebar()">☰</div>
-        <div class="logo">Name</div>
-        <input type="text" class="search-bar" placeholder="Search">
-        <div class="nav-icons">
-            <button class="chat-btn" onclick="navigateTo('chat.html')">💬</button>
-            <button class="notif-btn" onclick="navigateTo('notifications.html')">🔔</button>
-            <div class="profile-icon" onclick="navigateTo('profile.html')"><img src="profile.jpg" alt="Profile"></div>
+    <div id="home" class="screen active">
+        <div class="header">
+            <h1>Social App</h1>
         </div>
-    </header>
-
-    <div class="container">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li><a href="home.html">🏠 Home</a></li>
-                    <li><a href="popular.html">🔥 Popular Title</a></li>
-                    <li><a href="content.html">🌎 All Content</a></li>
-                    <li><a href="feed.html">📌 My Feed</a></li>
-                    <li><a href="chat.html">💬 Chat Rooms</a></li>
-                    <li class="category">
-                        <span onclick="toggleCategory()">📂 Category</span>
-                        <ul id="category-list" class="hidden">
-                            <li><a href="anime.html">📺 Anime</a></li>
-                            <li><a href="books.html">📚 Books</a></li>
-                            <li><a href="learning.html">🎓 Learning</a></li>
-                            <li><a href="movies.html">🎬 Movie</a></li>
-                            <li><a href="music.html">🎵 Musics</a></li>
-                            <li><a href="news.html">📰 News</a></li>
-                            <li><a href="sports.html">⚽ Sports</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="rules.html">⚖ Rules</a></li>
-                    <li><a href="about.html">ℹ️ About Us</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="content">
-            <div class="create-post">
-                <h2>Create a Post</h2>
-                <input type="text" id="post-title" placeholder="Post title">
-                <textarea id="post-content" placeholder="Write something..."></textarea>
-                <button onclick="createPost()">Post</button>
-            </div>
-            <div id="post-container" class="post-container"></div>
-        </main>
+        <div class="post-box">
+            <input type="text" id="post-input" placeholder="Post your message">
+            <button onclick="postMessage()">Post</button>
+        </div>
+        <div class="post-list" id="post-list"></div>
+        <div class="nav-bar">
+            <button onclick="showScreen('home')">Home</button>
+            <button onclick="showScreen('chatrooms')">Chat Rooms</button>
+            <button onclick="showScreen('profile')">Profile</button>
+        </div>
     </div>
+
+    <div id="chatrooms" class="screen">
+        <div class="header">
+            <h1>Chat Rooms</h1>
+        </div>
+        <div class="chat-box">
+            <input type="text" id="chat-input" placeholder="Enter message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <div class="chat-list" id="chat-list"></div>
+        <div class="nav-bar">
+            <button onclick="showScreen('home')">Home</button>
+            <button onclick="showScreen('profile')">Profile</button>
+        </div>
+    </div>
+
+    <div id="profile" class="screen">
+        <div class="header">
+            <h1>Profile</h1>
+        </div>
+        <div class="nav-bar">
+            <button onclick="showScreen('home')">Home</button>
+            <button onclick="showScreen('chatrooms')">Chat Rooms</button>
+        </div>
+    </div>
+
+    <div id="comments" class="screen">
+        <div class="header">
+            <h1>Comments</h1>
+        </div>
+        <input type="text" id="comment-input" placeholder="Write a comment">
+        <button onclick="addComment()">Comment</button>
+        <div id="comment-list"></div>
+        <button onclick="showScreen('home')">Back</button>
+    </div>
+
+    <script>
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function postMessage() {
+            let input = document.getElementById("post-input").value;
+            if (input.trim() === "") {
+                alert("Please enter a message!");
+                return;
+            }
+            let postList = document.getElementById("post-list");
+            let newPost = document.createElement("div");
+            newPost.classList.add("post");
+            newPost.innerHTML = `<p>${input}</p>
+                <button onclick='likePost()'>Like</button>
+                <button onclick='showScreen("comments")'>Comment</button>`;
+            postList.appendChild(newPost);
+            document.getElementById("post-input").value = "";
+        }
+
+        function likePost() {
+            alert("You liked this post!");
+        }
+
+        function addComment() {
+            let comment = document.getElementById("comment-input").value;
+            if (comment.trim() === "") {
+                alert("Please enter a comment!");
+                return;
+            }
+            let commentList = document.getElementById("comment-list");
+            let newComment = document.createElement("div");
+            newComment.textContent = comment;
+            commentList.appendChild(newComment);
+            document.getElementById("comment-input").value = "";
+        }
+
+        function sendMessage() {
+            let message = document.getElementById("chat-input").value;
+            if (message.trim() === "") {
+                alert("Please enter a message!");
+                return;
+            }
+            let chatList = document.getElementById("chat-list");
+            let newMessage = document.createElement("div");
+            newMessage.textContent = message;
+            chatList.appendChild(newMessage);
+            document.getElementById("chat-input").value = "";
+        }
+    </script>
+
+    <style>
+        .screen {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .post,
+        .chat-message {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .nav-bar {
+            margin-top: 20px;
+        }
+
+        .nav-bar button {
+            margin: 5px;
+        }
+
+        .header {
+            background-color: darkgray;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .chat-box {
+            margin: 10px;
+        }
+    </style>
 </body>
 
 </html>
-
-<script>
-    function toggleSidebar() {
-        document.querySelector(".sidebar").classList.toggle("collapsed");
-    }
-
-    function toggleCategory() {
-        document.getElementById("category-list").classList.toggle("hidden");
-    }
-
-    function navigateTo(page) {
-        window.location.href = page;
-    }
-
-    function createPost() {
-        let title = document.getElementById('post-title').value;
-        let content = document.getElementById('post-content').value;
-
-        if (title.trim() === '' || content.trim() === '') {
-            alert('Title and content cannot be empty!');
-            return;
-        }
-
-        let postContainer = document.getElementById('post-container');
-        let newPost = document.createElement('div');
-        newPost.classList.add('post');
-        newPost.innerHTML = `
-            <h3>${title}</h3>
-            <p>${content}</p>
-            <div class="post-footer">
-                <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
-                <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
-                <button class="comment-btn" onclick="openCommentSection(this)">💬 Comment</button>
-            </div>
-            <div class="comment-section hidden">
-                <input type="text" class="comment-input" placeholder="Write a comment...">
-                <button onclick="addComment(this)">Post</button>
-                <div class="comments"></div>
-            </div>
-        `;
-        postContainer.prepend(newPost);
-        document.getElementById('post-title').value = '';
-        document.getElementById('post-content').value = '';
-    }
-
-    function openCommentSection(button) {
-        button.nextElementSibling.classList.toggle("hidden");
-    }
-
-    function addComment(button) {
-        let input = button.previousElementSibling;
-        let commentText = input.value.trim();
-        if (commentText === '') return;
-
-        let commentDiv = document.createElement('div');
-        commentDiv.classList.add('comment');
-        commentDiv.textContent = commentText;
-
-        button.parentElement.querySelector(".comments").appendChild(commentDiv);
-        input.value = '';
-    }
-</script>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #F5F1E9;
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background: #006400;
-        color: white;
-    }
-
-    .search-bar {
-        padding: 5px;
-        width: 300px;
-        border-radius: 4px;
-        border: none;
-    }
-
-    .container {
-        display: flex;
-    }
-
-    .sidebar {
-        width: 250px;
-        background: white;
-        padding: 15px;
-    }
-
-    .sidebar ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .sidebar ul li {
-        margin: 10px 0;
-    }
-
-    .sidebar ul li a {
-        text-decoration: none;
-        color: black;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .content {
-        flex: 1;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .create-post {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        width: 60%;
-        margin-bottom: 20px;
-    }
-
-    .create-post input,
-    .create-post textarea {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .create-post button {
-        background: #006400;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .post-container {
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .post {
-        background: white;
-        padding: 15px;
-        margin: 15px 0;
-        border-radius: 8px;
-        width: 100%;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-</style>
-
-<script>
-    function createPost() {
-        let title = document.getElementById('post-title').value;
-        let content = document.getElementById('post-content').value;
-
-        if (title.trim() === '' || content.trim() === '') {
-            alert('Title and content cannot be empty!');
-            return;
-        }
-
-        let postContainer = document.getElementById('post-container');
-        let newPost = document.createElement('div');
-        newPost.classList.add('post');
-        newPost.innerHTML = `
-            <h3>${title}</h3>
-            <p>${content}</p>
-            <div class="post-footer">
-                <button class="vote upvote" onclick="upvote(this)">⬆ 0</button>
-                <button class="vote downvote" onclick="downvote(this)">⬇ 0</button>
-                <button class="share-btn">🔗 Share</button>
-            </div>
-        `;
-        postContainer.prepend(newPost);
-        document.getElementById('post-title').value = '';
-        document.getElementById('post-content').value = '';
-    }
-</script>
