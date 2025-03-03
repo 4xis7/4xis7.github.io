@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social App</title>
+    <title>Ween App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="header">Social App</div>
+        <div class="header">Ween App</div>
         <div class="post-box">
             <input type="text" id="post-input" placeholder="Post your message">
             <button onclick="postMessage()">Post</button>
@@ -38,7 +38,73 @@
             document.getElementById("post-input").value = "";
         }
     </script>
+<div id="chatrooms" class="screen">
+    <div class="header">
+        <h1>Chat Rooms</h1>
+    </div>
+    <button onclick="showScreen('home')">Home</button>
+    <button onclick="showScreen('profile')">Profile</button>
+</div>
 
+<div id="profile" class="screen">
+    <div class="header">
+        <h1>Profile</h1>
+    </div>
+    <button onclick="showScreen('home')">Home</button>
+    <button onclick="showScreen('chatrooms')">Chat Rooms</button>
+</div>
+
+<div id="comments" class="screen">
+    <div class="header">
+        <h1>Comments</h1>
+    </div>
+    <input type="text" id="comment-input" placeholder="Write a comment">
+    <button onclick="addComment()">Comment</button>
+    <div id="comment-list"></div>
+    <button onclick="showScreen('home')">Back</button>
+</div>
+
+<script>
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(screen => {
+            screen.classList.remove('active');
+        });
+        document.getElementById(screenId).classList.add('active');
+    }
+
+    function postMessage() {
+        let input = document.getElementById("post-input").value;
+        if (input.trim() === "") {
+            alert("Please enter a message!");
+            return;
+        }
+        let postList = document.getElementById("post-list");
+        let newPost = document.createElement("div");
+        newPost.classList.add("post");
+        newPost.innerHTML = `<p>${input}</p>
+                <button onclick='likePost()'>Like</button>
+                <button onclick='showScreen("comments")'>Comment</button>`;
+        postList.appendChild(newPost);
+        document.getElementById("post-input").value = "";
+    }
+
+    function likePost() {
+        alert("You liked this post!");
+    }
+
+    function addComment() {
+        let comment = document.getElementById("comment-input").value;
+        if (comment.trim() === "") {
+            alert("Please enter a comment!");
+            return;
+        }
+        let commentList = document.getElementById("comment-list");
+        let newComment = document.createElement("div");
+        newComment.textContent = comment;
+        commentList.appendChild(newComment);
+        document.getElementById("comment-input").value = "";
+    }
+</script>
     <style>
         body {
             font-family: Arial, sans-serif;
