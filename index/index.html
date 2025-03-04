@@ -83,11 +83,17 @@
             margin-top: 20px;
             transition: background 0.3s, transform 0.2s;
             box-shadow: 0px 2px 10px rgba(0, 123, 255, 0.3);
+            cursor: pointer;
         }
 
         .download-btn:hover {
             background-color: #0056b3;
             transform: scale(1.05);
+        }
+
+        .qr-container {
+            display: none;
+            margin-top: 20px;
         }
 
         .description {
@@ -103,6 +109,11 @@
             color: #666;
         }
     </style>
+    <script>
+        function showQRCode() {
+            document.getElementById('qr-container').style.display = 'block';
+        }
+    </script>
 </head>
 
 <body>
@@ -130,8 +141,8 @@
                 <h2>Why Choose Ween App?</h2>
                 <p>แอพใช้งานง่าย มีระบบแชทสำหรับการสนทนา และช่วยให้การแลกเปลี่ยนข้อมูลเป็นเรื่องง่ายขึ้น</p>
             </div>
-            <a class="download-btn">Download Now</a>
-            <div class="app-image">
+            <button class="download-btn" onclick="showQRCode()">Download Now</button>
+            <div id="qr-container" class="qr-container">
                 <img src="Screenshot 2025-03-05 000548.png" alt="QR Code for Download">
             </div>
             <div class="footer">
