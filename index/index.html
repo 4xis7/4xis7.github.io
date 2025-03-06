@@ -134,6 +134,17 @@
             font-size: 18px;
             color: #666;
         }
+        .video-container {
+            margin-top: 20px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
     </style>
     <script>
         function showQRCode() {
@@ -175,7 +186,10 @@
                 </div>
                 <h2>Why Choose Ween App?</h2>
                 <p>แอพใช้งานง่าย มีระบบแชทสำหรับการสนทนา และช่วยให้การแลกเปลี่ยนข้อมูลเป็นเรื่องง่ายขึ้น</p>
-            </div>
+            <div class="video-container">
+                <h2>Presentation</h2>
+                <iframe src="https://www.youtube.com/embed/APRSE7ti6mw?si=fJGLkrHOso1X07et" allowfullscreen></iframe>
+                </div>
             <button class="download-btn" onclick="showQRCode()">Download Now</button>
             <div id="qr-container" class="qr-container">
                 <img src="picture/Screenshot 2025-03-05 000548.png" alt="QR Code for Download">
