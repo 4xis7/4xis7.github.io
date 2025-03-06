@@ -103,6 +103,31 @@
             line-height: 1.6;
         }
 
+        .key-features {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature img {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+        }
+
         .footer {
             margin-top: 30px;
             font-size: 16px;
@@ -133,11 +158,20 @@
                 <p>Ween App เป็นแพลตฟอร์มสำหรับการตั้งหัวข้อคำถาม แชร์ประสบการณ์
                     และแลกเปลี่ยนความคิดเห็นกันในหมู่ผู้ใช้งาน</p>
                 <h2>Key Features</h2>
-                <ul style="list-style: none; padding: 0;">
-                    <li>✅ ตั้งหัวข้อพูดคุยและแชร์ประสบการณ์ระหว่างผู้ใช้งาน</li>
-                    <li>✅ ห้องแชทสำหรับพูดคุยแลกเปลี่ยนความคิดเห็น</li>
-                    <li>✅ การแยกหมวดหมู่ของโพสต์เพื่อความสะดวก</li>
-                </ul>
+                <div class="key-features">
+                    <div class="feature">
+                        <img src="post.png" alt="Chat">
+                        <span>ตั้งหัวข้อพูดคุยและแชร์ประสบการณ์ระหว่างผู้ใช้งาน</span>
+                    </div>
+                    <div class="feature">
+                        <img src="chat chatagory.png" alt="Group Chat">
+                        <span>ห้องแชทสำหรับพูดคุยแลกเปลี่ยนความคิดเห็นเเละเเยกหัวข้อของเเชท</span>
+                    </div>
+                    <div class="feature">
+                        <img src="post catagory.png" alt="Categories">
+                        <span>การแยกหมวดหมู่ของโพสต์เพื่อความสะดวก</span>
+                    </div>
+                </div>
                 <h2>Why Choose Ween App?</h2>
                 <p>แอพใช้งานง่าย มีระบบแชทสำหรับการสนทนา และช่วยให้การแลกเปลี่ยนข้อมูลเป็นเรื่องง่ายขึ้น</p>
             </div>
@@ -145,8 +179,7 @@
             <div id="qr-container" class="qr-container">
                 <img src="Screenshot 2025-03-05 000548.png" alt="QR Code for Download">
             </div>
-            <div class="footer">
-            </div>
+            <div class="footer"></div>
         </div>
     </div>
 </body>
